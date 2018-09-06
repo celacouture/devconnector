@@ -35,13 +35,13 @@ router.get('/', passport.authenticate
    })
    .catch(err=>res.status(404).json(err));
 });
-// @route GET api/profile/validateProfileInput
+// @route GET api/profile/all
 // @desc get all profiles
 // @access Public
 router.get('/all', (req, res)=>{
   Profile.find()
   .populate('user', ['name', 'avatar'])
-  ,then(profiles=>{
+  .then(profiles=>{
     if(!profiles){
       errors.noprofile='There are no profiles'
       return res.status(404).json(errors)
@@ -82,7 +82,7 @@ router.get('/user/:user_id', (req, res)=>{
     }
     res.json(profile)
   })
-  .catch(err => res.status(404).json({profile:'Ther is no profile for this user'}));
+  .catch(err => res.status(404).json({profile:'There is no profile for this user'}));
 
 });
 
